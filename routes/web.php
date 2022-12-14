@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -54,3 +55,7 @@ Route::name('users.')->prefix('users')->group(function(){
         })->name('show');
     });
 });
+//Route::get('invitations',['invitation' => '12345','answer' => 'yes']);
+Route::get('tasks',[TasksController::class,'index']);
+Route::get('tasks/create',[TasksController::class,'create']);
+Route::post('tasks',[TasksController::class,'store']);
