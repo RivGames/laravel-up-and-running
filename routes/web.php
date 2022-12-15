@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\MySampleResourceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -59,3 +60,15 @@ Route::name('users.')->prefix('users')->group(function(){
 Route::get('tasks',[TasksController::class,'index']);
 Route::get('tasks/create',[TasksController::class,'create']);
 Route::post('tasks',[TasksController::class,'store']);
+Route::resource('test',MySampleResourceController::class);
+Route::get('redirect-users-comments-show',function(){
+   return redirect()
+       ->route('users.comments.show',['id' => 10])
+       ->with(['error' => true, 'message' => 'Whoops...Something went wrong']);
+});
+Route::get('redirect-to-/',function(){
+   return redirect('/');
+});
+Route::get('download',function(){
+    return response()->download('1.txt','readme.txt');
+});
